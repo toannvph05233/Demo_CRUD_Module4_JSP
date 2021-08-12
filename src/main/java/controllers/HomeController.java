@@ -2,9 +2,7 @@ package controllers;
 
 import models.Customer;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import service.CRUDCustomer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +18,7 @@ public class HomeController {
     }
 
     @GetMapping("/edit")
-    public String showedit(HttpServletRequest request) {
-        int index = Integer.parseInt(request.getParameter("index"));
+    public String showedit(HttpServletRequest request, @RequestParam int index) {
         request.setAttribute("customer", crudCustomer.list.get(index));
         return "/WEB-INF/edit.jsp";
     }
@@ -32,38 +29,21 @@ public class HomeController {
     }
 
     @GetMapping("/delete")
-    public String delete(HttpServletRequest request) {
-        int index = Integer.parseInt(request.getParameter("index"));
+    public String delete(@RequestParam int index) {
         crudCustomer.delete(index);
-
-        request.setAttribute("list", crudCustomer.list);
-        return "/WEB-INF/show.jsp";
+        return "redirect:/show";
     }
 
 
     @PostMapping("/edit")
-    public String edit(HttpServletRequest request) {
-        int index = Integer.parseInt(request.getParameter("index"));
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-
-        Customer customer = new Customer(id, name, email);
+    public String edit(@RequestParam int index,@ModelAttribute Customer customer) {
         crudCustomer.edit(customer, index);
-
-        request.setAttribute("list", crudCustomer.list);
-        return "/WEB-INF/show.jsp";
+        return "redirect:/show";
     }
 
     @PostMapping("/create")
-    public String creaate(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        Customer customer = new Customer(id, name, email);
+    public String creaate(@ModelAttribute Customer customer) {
         crudCustomer.save(customer);
-
-        request.setAttribute("list", crudCustomer.list);
-        return "/WEB-INF/show.jsp";
+        return "redirect:/show";
     }
 }
