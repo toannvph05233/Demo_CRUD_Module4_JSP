@@ -2,9 +2,9 @@ ApplicationConfig.java
  ApplicationConfig
 ApplicationInitializer.java
  ApplicationInitializer
-service/CRUDCustomer.java
- service.CRUDCustomer
 models/Customer.java
  models.Customer
+service/CRUDCustomer.java
+ service.CRUDCustomer
 controllers/HomeController.java
  controllers.HomeController

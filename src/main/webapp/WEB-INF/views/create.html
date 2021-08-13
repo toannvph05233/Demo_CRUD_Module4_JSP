@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:replace="/layout :: header"></div>
+
+<form action="/create" method="post">
+  <table>
+    <tr>
+      <td><input type="text" name="id" placeholder="nhập id"></td>
+      <td><input type="text" name="name" placeholder="nhập name"></td>
+      <td><input type="text" name="email" placeholder="nhập email"></td>
+    </tr>
+
+    <tr>
+      <td>
+        <button type="submit">Create Nhan viên</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<div th:replace="/layout :: footer"></div>
+
+
+</body>
+</html>

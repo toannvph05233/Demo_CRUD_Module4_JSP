@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="/layout :: header"></div>
+<a href="/create">create</a>
+<table th:each="c,loop : ${list}">
+    <tr th:object="${c}">
+        <td th:utext="${loop.index + 1}"></td>
+        <td th:utext="*{id}"></td>
+        <td th:utext="*{name}"></td>
+        <td th:utext="*{email}"></td>
+        <td><a th:href="@{/edit(index=${loop.index})}">edit</a></td>
+        <td><a th:href="@{/delete(index=${loop.index})}">delete</a></td>
+        <td><a th:href="@{/customer(id=${c.id},name = ${c.name})}">abc</a></td>
+
+    </tr>
+    <div th:switch="${c.id}">
+        <h1 th:case="2">ok 2 </h1>
+        <h1 th:case="*">ok * </h1>
+    </div>
+</table>
+
+<div th:replace="/layout :: footer"></div>
+</body>
+</html>
